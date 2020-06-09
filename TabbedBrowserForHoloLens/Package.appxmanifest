@@ -8,7 +8,7 @@
 
   <Identity
     Name="265f0471-3522-45c6-86c2-277857827185"
-    Publisher="CN=yusuke"
+    Publisher="CN=HoloLab Inc."
     Version="1.0.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="265f0471-3522-45c6-86c2-277857827185" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
