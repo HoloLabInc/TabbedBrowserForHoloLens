@@ -11,7 +11,7 @@
 
     <Grid>
         <Grid>
-            <muxc:TabView x:Name="tabView" VerticalAlignment="Stretch" />
+            <muxc:TabView x:Name="tabView" VerticalAlignment="Stretch" AddTabButtonClick="AddTabButtonClick" TabCloseRequested="TabCloseRequested"/>
         </Grid>
     </Grid>
 </Page>

@@ -1,6 +1,7 @@
 ﻿using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -23,31 +24,62 @@ namespace TabbedBrowserForHoloLens
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private readonly string defaultPageUri = "http://google.com";
+
         public MainPage()
         {
             this.InitializeComponent();
         }
 
-        public void OpenNewPage(string uri)
+        public void OpenNewPage(string uriString)
         {
+            Uri uri;
+            try
+            {
+                uri = new Uri(uriString);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+                return;
+            }
+
             var webView = new WebView
             {
-                Source = new Uri(uri)
+                Source = uri
             };
+            webView.NavigationCompleted += WebView_NavigationCompleted;
 
             var newTab = new TabViewItem
             {
                 Content = webView,
-
-                IconSource = new Microsoft.UI.Xaml.Controls.SymbolIconSource()
-                {
-                    Symbol = Symbol.Document
-                },
-                Header = "New Document"
+                Header = uriString
             };
 
             tabView.TabItems.Add(newTab);
             tabView.SelectedItem = newTab;
+        }
+
+        private void WebView_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
+        {
+            var tabViewItem = sender.Parent as TabViewItem;
+            if (tabViewItem == null)
+            {
+                return;
+            }
+
+            var title = sender.DocumentTitle;
+            tabViewItem.Header = title;
+        }
+
+        private void AddTabButtonClick(TabView sender, object e)
+        {
+            OpenNewPage(defaultPageUri);
+        }
+
+        private void TabCloseRequested(TabView sender, TabViewTabCloseRequestedEventArgs args)
+        {
+            sender.TabItems.Remove(args.Tab);
         }
     }
 }
