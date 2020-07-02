@@ -67,6 +67,9 @@ namespace TabbedBrowserForHoloLens
                     // このとき、必要な情報をナビゲーション パラメーターとして渡して、新しいページを
                     // 作成します
                     rootFrame.Navigate(typeof(MainPage), e.Arguments);
+
+                    var mainPage = rootFrame?.Content as MainPage;
+                    mainPage?.OpenNewPage();
                 }
                 // 現在のウィンドウがアクティブであることを確認します
                 Window.Current.Activate();

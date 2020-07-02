@@ -31,8 +31,13 @@ namespace TabbedBrowserForHoloLens
             this.InitializeComponent();
         }
 
-        public void OpenNewPage(string uriString)
+        public void OpenNewPage(string uriString = null)
         {
+            if (uriString == null)
+            {
+                uriString = defaultPageUri;
+            }
+
             Uri uri;
             try
             {
