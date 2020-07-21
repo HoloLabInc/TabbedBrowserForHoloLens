@@ -2,6 +2,7 @@
 
 TabbedBrowserForHoloLens (HoloBrowser) is a tabbed brower for HoloLens to launch from 3D applications.
 
+## Demo Video
 [![HoloBrowserDemo](http://img.youtube.com/vi/EubbN18fYPU/0.jpg)](https://www.youtube.com/watch?v=EubbN18fYPU "HoloBrowser Demo")
 
 ## Install from Microsoft Store
