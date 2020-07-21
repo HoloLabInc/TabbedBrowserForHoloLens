@@ -14,7 +14,7 @@ Open `TabbedBrowserForHoloLens.sln`.
 
 Build `TabbedBrowserForHoloLens` solution.
 
-## Launch browser from 3D applications
+## Launch browser from Unity 3D applications
 ```cs
 using System;
 using System.Collections;
