@@ -4,6 +4,7 @@ TabbedBrowserForHoloLens (HoloBrowser) is a tabbed brower for HoloLens to launch
 
 ## Install from Microsoft Store
 
+https://www.microsoft.com/p/holobrowser/9nz4bs6lfhmt
 
 ## Build from source
 Open `TabbedBrowserForHoloLens.sln`.
