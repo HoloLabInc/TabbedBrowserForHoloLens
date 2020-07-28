@@ -53,6 +53,7 @@ namespace TabbedBrowserForHoloLens
             {
                 Source = uri
             };
+
             webView.NavigationCompleted += WebView_NavigationCompleted;
 
             var newTab = new TabViewItem
@@ -65,8 +66,19 @@ namespace TabbedBrowserForHoloLens
             tabView.SelectedItem = newTab;
         }
 
-        private void WebView_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
+        private async void WebView_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
         {
+            // change size for image
+            var windowWidth = ((Frame)Window.Current.Content).ActualWidth;
+
+            var script = $@"
+c=document.body.children;
+if(c.length==1 && c[0].tagName==""IMG""){{
+  c[0].width={windowWidth};
+}}";
+            await sender.InvokeScriptAsync("eval", new string[] { script });
+
+            // change header
             var tabViewItem = sender.Parent as TabViewItem;
             if (tabViewItem == null)
             {
@@ -74,7 +86,18 @@ namespace TabbedBrowserForHoloLens
             }
 
             var title = sender.DocumentTitle;
-            tabViewItem.Header = title;
+            var uri = args.Uri.AbsoluteUri;
+
+            string header;
+            if (string.IsNullOrEmpty(title))
+            {
+                header = uri;
+            }
+            else
+            {
+                header = title;
+            }
+            tabViewItem.Header = header;
         }
 
         private void AddTabButtonClick(TabView sender, object e)
